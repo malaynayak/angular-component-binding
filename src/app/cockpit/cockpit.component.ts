@@ -18,18 +18,25 @@ export class CockpitComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddServer() {
+  onAddServer(nameInput: HTMLInputElement, contentInput: HTMLInputElement) {
+    // // Via two way binding.
+    // this.serverCreated.emit({
+    //   serverName: this.newServerName,
+    //   serverContent: this.newServerContent
+    // });
+
+    // Via view reference.
     this.serverCreated.emit({
-      serverName: this.newServerName,
-      serverContent: this.newServerContent
+      serverName: nameInput.value,
+      serverContent: contentInput.value
     });
   }
 
-  onAddBlueprint() {
+  onAddBlueprint(nameInput: HTMLInputElement, contentInput: HTMLInputElement) {
     this.blueprintCreated.emit({
-      serverName: this.newServerName,
-      serverContent: this.newServerContent
-    })
+      serverName: nameInput.value,
+      serverContent: contentInput.value
+    });
   }
 
 }
