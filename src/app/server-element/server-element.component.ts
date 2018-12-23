@@ -10,7 +10,10 @@ import {
   OnDestroy,
   Input,
   ViewEncapsulation,
-  SimpleChanges
+  SimpleChanges,
+  ViewChild,
+  ContentChild,
+  ElementRef
 } from '@angular/core';
 
 @Component({
@@ -32,6 +35,11 @@ export class ServerElementComponent implements
 
   // Decorator to expose element to another component(with Alias).
   @Input('srvElement') element: {type: string, name: string, content: string};
+
+  @ViewChild('heading') header: ElementRef;
+
+  // Decorator to get reference inside ng-content
+  @ContentChild('contentParagraph') paragraph: ElementRef;
 
   constructor() {
     console.log("Constructor Called");
@@ -55,6 +63,7 @@ export class ServerElementComponent implements
   // Called after content (ng-content) has been projected into view.
   ngAfterContentInit() {
     console.log("ngAfterContentInit Called");
+    console.log("Paragraph is: " + this.paragraph.nativeElement.textContent);
   }
 
   // Called every time the projected content has been checked.
@@ -65,6 +74,7 @@ export class ServerElementComponent implements
   // Called after the component’s view (and child views) has been initialized.
   ngAfterViewInit() {
     console.log("ngAfterViewInit Called");
+    console.log("Heading is: " + this.header.nativeElement.textContent);
   }
 
   // Called every time the view (and child views) have been checked.
